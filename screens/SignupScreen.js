@@ -1,14 +1,29 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useState } from 'react';
-import { View, Text, Button, TouchableOpacity, Image, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import FormButton from '../components/FormButton';
 import FormInput from '../components/FormInput';
 import SocialButton from '../components/SocialButton';
+import { AuthContext } from '../navigation/AuthProvider';
 
 const SignupScreen = ({navigation}) => {
-    const [email, setEmail] = useState();
-    const [password, setPassword] = useState();
-    const [ConfirmPassword, setConfirmPassword] = useState();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    // const [ConfirmPassword, setConfirmPassword] = useState('');
+
+    const {register} = useContext(AuthContext);
+
+    // const SignupHandler = async () => {
+    //     await createUserWithEmailAndPassword(auth, email, password).then((userCredential) => {
+    //       const user = userCredential.user;
+    //       console.log(user);
+    //       navigation.navigate('Home');
+    //     }).catch((error) => {
+    //       const errorCode = error.code;
+    //       const errorMessage = error.message;
+    //       console.log(errorCode, errorMessage);
+    //     });
+    //   };
 
     return (
         <View style={styles.container}>
@@ -29,16 +44,16 @@ const SignupScreen = ({navigation}) => {
               iconType="lock"
               secureTextEntry={true}
             />
-            <FormInput
+            {/* <FormInput
               labelValue={ConfirmPassword}
               onChangeText={(userConfirmPassword) => setConfirmPassword(userConfirmPassword)} 
               placeholderText="Confirm Password"
               iconType="lock"
               secureTextEntry={true}
-            />
+            /> */}
             <FormButton
               title="Sign Up"
-              onPress={() => alert("Sign Up Button Clickedd!")}
+              onPress={() => register(email, password)}
             />
             <View style={styles.textPrivate}>
                 <Text style={styles.color_textPrivate}>By registering, you confirm that you accept our</Text>
