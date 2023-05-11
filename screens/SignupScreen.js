@@ -5,17 +5,14 @@ import FormButton from '../components/FormButton';
 import FormInput from '../components/FormInput';
 import SocialButton from '../components/SocialButton';
 
-const LoginScreen = ({navigation}) => {
+const SignupScreen = ({navigation}) => {
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
+    const [ConfirmPassword, setConfirmPassword] = useState();
 
     return (
         <View style={styles.container}>
-            <Image 
-              source={require("../assets/logo.png")}
-              style={styles.logo}
-            />
-            <Text style={styles.text}>Star Wars App</Text>
+            <Text style={styles.text}>Create an Account</Text>
             <FormInput
               labelValue={email}
               onChangeText={(userEmail) => setEmail(userEmail)} 
@@ -32,13 +29,25 @@ const LoginScreen = ({navigation}) => {
               iconType="lock"
               secureTextEntry={true}
             />
-            <FormButton
-              title="Log In"
-              onPress={() => alert("Log In Button Clicked!")}
+            <FormInput
+              labelValue={ConfirmPassword}
+              onChangeText={(userConfirmPassword) => setConfirmPassword(userConfirmPassword)} 
+              placeholderText="Confirm Password"
+              iconType="lock"
+              secureTextEntry={true}
             />
-            <TouchableOpacity style={styles.forgotButton}>
-                <Text style={styles.navButtonText}>Forgot Password?</Text>
-            </TouchableOpacity>
+            <FormButton
+              title="Sign Up"
+              onPress={() => alert("Sign Up Button Clickedd!")}
+            />
+            <View style={styles.textPrivate}>
+                <Text style={styles.color_textPrivate}>By registering, you confirm that you accept our</Text>
+                <TouchableOpacity onPress={() => alert("Terms and Conditions!")}>
+                    <Text style={[styles.color_textPrivate, {color: '#e88832'}]}>Terms of Service</Text>
+                </TouchableOpacity>
+                <Text style={styles.color_textPrivate}> and </Text>
+                <Text style={[styles.color_textPrivate, {color: '#e88832'}]}>Privacy Policy</Text>
+            </View>
             <SocialButton 
               title="Sign in with Facebook"
               btnType="facebook"
@@ -53,14 +62,14 @@ const LoginScreen = ({navigation}) => {
               backgroundColor="#f5e7ea"
               onPress={() => {}}
             />
-            <TouchableOpacity style={styles.forgotButton} onPress={() => navigation.navigate("Signup")}>
-                <Text style={styles.navButtonText}>Don't have an account? Create here</Text>
+            <TouchableOpacity style={styles.navButton} onPress={() => navigation.navigate('Login')}>
+                <Text style={styles.navButtonText}>Have an account? Log In</Text>
             </TouchableOpacity>
         </View>
     );
 };
 
-export default LoginScreen;
+export default SignupScreen;
 
 const styles =  StyleSheet.create({
     container: {
@@ -70,11 +79,6 @@ const styles =  StyleSheet.create({
         padding: 20,
         backgroundColor: '#f9fafd'
     },
-    logo: {
-        height: 150,
-        width: 150,
-        resizeMode: 'cover'
-    },
     text: {
         fontSize: 28,
         marginBottom: 10,
@@ -83,12 +87,20 @@ const styles =  StyleSheet.create({
     navButton: {
         marginTop: 15
     },
-    forgotButton: {
-        marginVertical: 35
-    },
     navButtonText: {
         fontSize: 18,
         fontWeight: '500',
         color: '#2e64e5'
+    },
+    textPrivate: {
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        marginVertical: 35,
+        justifyContent: 'center'
+    },
+    color_textPrivate: {
+        fontSize: 13,
+        fontWeight: '400',
+        color: 'grey'
     }
 });
