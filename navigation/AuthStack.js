@@ -57,17 +57,6 @@ const AuthStack = () => {
               shadowColor: '#f9fafd',
               elevation: 0
             },
-            // headerLeft: () => {
-            //   <View style={{marginLeft: 10}}>
-            //     <Icon.Button 
-            //       name='long-arrow-left'
-            //       size={25}
-            //       backgroundColor="#f9fafd"
-            //       color="#333"
-            //       onPress={() => navigation.navigate("Login")}
-            //     />
-            //   </View>
-            // }
           })}
         />
       </Stack.Navigator>
