@@ -1,10 +1,12 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { useState } from 'react';
-import { View, Text, Button, TouchableOpacity, Image, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native';
 import FormButton from '../components/FormButton';
 import FormInput from '../components/FormInput';
 import SocialButton from '../components/SocialButton';
 import { AuthContext } from '../navigation/AuthProvider';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
 const LoginScreen = ({navigation}) => {
     const [email, setEmail] = useState();
@@ -12,24 +14,18 @@ const LoginScreen = ({navigation}) => {
 
     const {login} = useContext(AuthContext);
 
-    // const LoginHandler = async () => {
-    //   await signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
-    //     const user = userCredential.user;
-    //     console.log(user);
-    //   }).catch((error) => {
-    //     const errorCode = error.code;
-    //     const errorMessage = error.message;
-    //     console.log(errorCode, errorMessage);
-    //   });
-    // };
-
     return (
         <View style={styles.container}>
-            <Image 
+            {/* <Image 
               source={require("../assets/logo.png")}
               style={styles.logo}
-            />
-            <Text style={styles.text}>Star Wars App</Text>
+            /> */}
+            <View style={styles.textBox}>
+              <Text style={styles.text}>Sign In</Text>
+              <Text style={styles.subText}>Please fill up Email and Password to Login to your account</Text>
+            </View>
+
+            <View style={styles.inputBox}>
             <FormInput
               labelValue={email}
               onChangeText={(userEmail) => setEmail(userEmail)} 
@@ -46,13 +42,17 @@ const LoginScreen = ({navigation}) => {
               iconType="lock"
               secureTextEntry={true}
             />
-            <FormButton
-              title="Log In"
-              onPress={() => login(email, password)}
-            />
+            </View>
+
             <TouchableOpacity style={styles.forgotButton}>
                 <Text style={styles.navButtonText}>Forgot Password?</Text>
             </TouchableOpacity>
+            
+            <FormButton
+              title="Sign In"
+              onPress={() => login(email, password)}
+            />
+      
             <SocialButton 
               title="Sign in with Facebook"
               btnType="facebook"
@@ -67,9 +67,12 @@ const LoginScreen = ({navigation}) => {
               backgroundColor="#f5e7ea"
               onPress={() => {}}
             />
-            <TouchableOpacity style={styles.forgotButton} onPress={() => navigation.navigate("Signup")}>
-                <Text style={styles.navButtonText}>Don't have an account? Create here</Text>
+            <View style={styles.lastText}>
+            <Text style={styles.subText}>Don't have an account?</Text>
+            <TouchableOpacity onPress={() => navigation.navigate("Signup")}>
+                <Text style={styles.navButtonText}> Create here</Text>
             </TouchableOpacity>
+            </View>
         </View>
     );
 };
@@ -82,7 +85,7 @@ const styles =  StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         padding: 20,
-        backgroundColor: '#f9fafd'
+        backgroundColor: '#181818'
     },
     logo: {
         height: 150,
@@ -90,19 +93,40 @@ const styles =  StyleSheet.create({
         resizeMode: 'cover'
     },
     text: {
-        fontSize: 28,
-        marginBottom: 10,
-        color: '#051d5f'
+        fontSize: 32,
+        marginBottom: 8,
+        color: '#FFFFFF',
+        fontWeight: 'bold',
+    },
+    subText: {
+        fontSize: 16,
+        color: '#6B728E',
+        marginBottom: 28
+    },
+    textBox: {
+      alignItems: 'flex-start'
+    },
+    inputBox: {
+      paddingHorizontal: 10,
+      backgroundColor: '#2C2E43',
+      borderRadius: 14,
+      paddingBottom: 5
     },
     navButton: {
         marginTop: 15
     },
     forgotButton: {
-        marginVertical: 35
+        marginTop: 32,
+        left: 110,
+        marginBottom: 6
     },
     navButtonText: {
-        fontSize: 18,
+        fontSize: 16,
         fontWeight: '500',
-        color: '#2e64e5'
+        color: '#BB371A'
+    },
+    lastText: {
+      flexDirection: 'row',
+      marginTop: 28
     }
 });
