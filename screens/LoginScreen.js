@@ -1,12 +1,11 @@
 import React, { useContext } from 'react';
 import { useState } from 'react';
-import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import FormButton from '../components/FormButton';
 import FormInput from '../components/FormInput';
 import SocialButton from '../components/SocialButton';
 import { AuthContext } from '../navigation/AuthProvider';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import AntDesign from 'react-native-vector-icons/AntDesign';
+import { Container, Card, Text1, Text2, Text3 } from '../styles/FeedStyle';
 
 const LoginScreen = ({navigation}) => {
     const [email, setEmail] = useState();
@@ -15,17 +14,13 @@ const LoginScreen = ({navigation}) => {
     const {login} = useContext(AuthContext);
 
     return (
-        <View style={styles.container}>
-            {/* <Image 
-              source={require("../assets/logo.png")}
-              style={styles.logo}
-            /> */}
+        <Container>
             <View style={styles.textBox}>
-              <Text style={styles.text}>Sign In</Text>
-              <Text style={styles.subText}>Please fill up Email and Password to Login to your account</Text>
+              <Text1 >Sign In</Text1>
+              <Text2 >Please fill up Email and Password to Login to your account</Text2>
             </View>
 
-            <View style={styles.inputBox}>
+            <Card>
             <FormInput
               labelValue={email}
               onChangeText={(userEmail) => setEmail(userEmail)} 
@@ -42,10 +37,10 @@ const LoginScreen = ({navigation}) => {
               iconType="lock"
               secureTextEntry={true}
             />
-            </View>
+            </Card>
 
             <TouchableOpacity style={styles.forgotButton}>
-                <Text style={styles.navButtonText}>Forgot Password?</Text>
+                <Text3 >Forgot Password?</Text3>
             </TouchableOpacity>
             
             <FormButton
@@ -68,49 +63,20 @@ const LoginScreen = ({navigation}) => {
               onPress={() => {}}
             />
             <View style={styles.lastText}>
-            <Text style={styles.subText}>Don't have an account?</Text>
+            <Text2 >Don't have an account?</Text2>
             <TouchableOpacity onPress={() => navigation.navigate("Signup")}>
-                <Text style={styles.navButtonText}> Create here</Text>
+                <Text3 > Create here</Text3>
             </TouchableOpacity>
             </View>
-        </View>
+        </Container>
     );
 };
 
 export default LoginScreen;
 
 const styles =  StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: 20,
-        backgroundColor: '#181818'
-    },
-    logo: {
-        height: 150,
-        width: 150,
-        resizeMode: 'cover'
-    },
-    text: {
-        fontSize: 32,
-        marginBottom: 8,
-        color: '#FFFFFF',
-        fontWeight: 'bold',
-    },
-    subText: {
-        fontSize: 16,
-        color: '#6B728E',
-        marginBottom: 28
-    },
     textBox: {
       alignItems: 'flex-start'
-    },
-    inputBox: {
-      paddingHorizontal: 10,
-      backgroundColor: '#2C2E43',
-      borderRadius: 14,
-      paddingBottom: 5
     },
     navButton: {
         marginTop: 15
@@ -119,11 +85,6 @@ const styles =  StyleSheet.create({
         marginTop: 32,
         left: 110,
         marginBottom: 6
-    },
-    navButtonText: {
-        fontSize: 16,
-        fontWeight: '500',
-        color: '#BB371A'
     },
     lastText: {
       flexDirection: 'row',

@@ -5,6 +5,7 @@ import FormButton from '../components/FormButton';
 import FormInput from '../components/FormInput';
 import SocialButton from '../components/SocialButton';
 import { AuthContext } from '../navigation/AuthProvider';
+import { Container, Text1, Card, Text2, Text3 } from '../styles/FeedStyle';
 
 const SignupScreen = ({navigation}) => {
     const [email, setEmail] = useState('');
@@ -14,13 +15,13 @@ const SignupScreen = ({navigation}) => {
     const {register} = useContext(AuthContext);
 
     return (
-        <View style={styles.container}>
+        <Container>
             <View style={styles.textBox}>
-              <Text style={styles.text}>Create an Account</Text>
-              <Text style={styles.subText}>Please fill up Email and Password to create your account</Text>
+              <Text1 >Create an Account</Text1>
+              <Text2 >Please fill up Email and Password to create your account</Text2>
             </View>
 
-            <View style={styles.inputBox}>
+            <Card>
             <FormInput
               labelValue={email}
               onChangeText={(userEmail) => setEmail(userEmail)} 
@@ -37,7 +38,7 @@ const SignupScreen = ({navigation}) => {
               iconType="lock"
               secureTextEntry={true}
             />
-            </View>
+            </Card>
             {/* <FormInput
               labelValue={ConfirmPassword}
               onChangeText={(userConfirmPassword) => setConfirmPassword(userConfirmPassword)} 
@@ -46,9 +47,9 @@ const SignupScreen = ({navigation}) => {
               secureTextEntry={true}
             /> */}
             <View style={styles.lastText}>
-            <Text style={styles.subText}>Have an account?</Text>
+            <Text2 >Have an account?</Text2>
             <TouchableOpacity onPress={() => navigation.navigate("Login")}>
-                <Text style={styles.navButtonText}> Log In</Text>
+                <Text3> Log In</Text3>
             </TouchableOpacity>
             </View>
 
@@ -78,46 +79,15 @@ const SignupScreen = ({navigation}) => {
                 <Text style={styles.color_textPrivate}> and </Text>
                 <Text style={[styles.color_textPrivate, {color: '#BB371A'}]}>Privacy Policy</Text>
             </View>
-            
-        </View>
+        </Container>
     );
 };
 
 export default SignupScreen;
 
 const styles =  StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: 20,
-        backgroundColor: '#181818',
-        marginTop: -90
-    },
-    text: {
-        fontSize: 32,
-        marginBottom: 8,
-        color: '#FFFFFF',
-        fontWeight: 'bold',
-    },
-    subText: {
-        fontSize: 16,
-        color: '#6B728E',
-        marginBottom: 28
-    },
     textBox: {
       alignItems: 'flex-start'
-    },
-    inputBox: {
-        paddingHorizontal: 10,
-        backgroundColor: '#2C2E43',
-        borderRadius: 14,
-        paddingBottom: 5
-    },
-    navButtonText: {
-        fontSize: 16,
-        fontWeight: '500',
-        color: '#BB371A'
     },
     textPrivate: {
         flexDirection: 'row',
