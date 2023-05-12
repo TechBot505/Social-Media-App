@@ -13,21 +13,14 @@ const SignupScreen = ({navigation}) => {
 
     const {register} = useContext(AuthContext);
 
-    // const SignupHandler = async () => {
-    //     await createUserWithEmailAndPassword(auth, email, password).then((userCredential) => {
-    //       const user = userCredential.user;
-    //       console.log(user);
-    //       navigation.navigate('Home');
-    //     }).catch((error) => {
-    //       const errorCode = error.code;
-    //       const errorMessage = error.message;
-    //       console.log(errorCode, errorMessage);
-    //     });
-    //   };
-
     return (
         <View style={styles.container}>
-            <Text style={styles.text}>Create an Account</Text>
+            <View style={styles.textBox}>
+              <Text style={styles.text}>Create an Account</Text>
+              <Text style={styles.subText}>Please fill up Email and Password to create your account</Text>
+            </View>
+
+            <View style={styles.inputBox}>
             <FormInput
               labelValue={email}
               onChangeText={(userEmail) => setEmail(userEmail)} 
@@ -44,6 +37,7 @@ const SignupScreen = ({navigation}) => {
               iconType="lock"
               secureTextEntry={true}
             />
+            </View>
             {/* <FormInput
               labelValue={ConfirmPassword}
               onChangeText={(userConfirmPassword) => setConfirmPassword(userConfirmPassword)} 
@@ -51,18 +45,17 @@ const SignupScreen = ({navigation}) => {
               iconType="lock"
               secureTextEntry={true}
             /> */}
+            <View style={styles.lastText}>
+            <Text style={styles.subText}>Have an account?</Text>
+            <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+                <Text style={styles.navButtonText}> Log In</Text>
+            </TouchableOpacity>
+            </View>
+
             <FormButton
               title="Sign Up"
               onPress={() => register(email, password)}
             />
-            <View style={styles.textPrivate}>
-                <Text style={styles.color_textPrivate}>By registering, you confirm that you accept our</Text>
-                <TouchableOpacity onPress={() => alert("Terms and Conditions!")}>
-                    <Text style={[styles.color_textPrivate, {color: '#e88832'}]}>Terms of Service</Text>
-                </TouchableOpacity>
-                <Text style={styles.color_textPrivate}> and </Text>
-                <Text style={[styles.color_textPrivate, {color: '#e88832'}]}>Privacy Policy</Text>
-            </View>
             <SocialButton 
               title="Sign in with Facebook"
               btnType="facebook"
@@ -77,9 +70,15 @@ const SignupScreen = ({navigation}) => {
               backgroundColor="#f5e7ea"
               onPress={() => {}}
             />
-            <TouchableOpacity style={styles.navButton} onPress={() => navigation.navigate('Login')}>
-                <Text style={styles.navButtonText}>Have an account? Log In</Text>
-            </TouchableOpacity>
+            <View style={styles.textPrivate}>
+                <Text style={styles.color_textPrivate}>By registering, you confirm that you accept our</Text>
+                <TouchableOpacity onPress={() => alert("Terms and Conditions!")}>
+                    <Text style={[styles.color_textPrivate, {color: '#BB371A'}]}>Terms of Service</Text>
+                </TouchableOpacity>
+                <Text style={styles.color_textPrivate}> and </Text>
+                <Text style={[styles.color_textPrivate, {color: '#BB371A'}]}>Privacy Policy</Text>
+            </View>
+            
         </View>
     );
 };
@@ -92,30 +91,49 @@ const styles =  StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         padding: 20,
-        backgroundColor: '#f9fafd'
+        backgroundColor: '#181818',
+        marginTop: -90
     },
     text: {
-        fontSize: 28,
-        marginBottom: 10,
-        color: '#051d5f'
+        fontSize: 32,
+        marginBottom: 8,
+        color: '#FFFFFF',
+        fontWeight: 'bold',
     },
-    navButton: {
-        marginTop: 15
+    subText: {
+        fontSize: 16,
+        color: '#6B728E',
+        marginBottom: 28
+    },
+    textBox: {
+      alignItems: 'flex-start'
+    },
+    inputBox: {
+        paddingHorizontal: 10,
+        backgroundColor: '#2C2E43',
+        borderRadius: 14,
+        paddingBottom: 5
     },
     navButtonText: {
-        fontSize: 18,
+        fontSize: 16,
         fontWeight: '500',
-        color: '#2e64e5'
+        color: '#BB371A'
     },
     textPrivate: {
         flexDirection: 'row',
         flexWrap: 'wrap',
-        marginVertical: 35,
-        justifyContent: 'center'
+        marginVertical: 28,
+        justifyContent: 'center',
     },
     color_textPrivate: {
-        fontSize: 13,
+        fontSize: 14,
         fontWeight: '400',
         color: 'grey'
-    }
+    },
+    lastText: {
+        flexDirection: 'row',
+        marginTop: 32,
+        left: 85,
+        marginBottom: -22
+      }
 });
