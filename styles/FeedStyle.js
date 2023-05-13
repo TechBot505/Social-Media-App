@@ -10,7 +10,6 @@ export const Container = styled.View`
 
 export const Container2 = styled.View`
   flex: 1;
-  align-items: center;
   padding: 20px;
   background-color: #181818;
 `;
